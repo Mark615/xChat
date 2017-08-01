@@ -1,0 +1,40 @@
+command:
+    description: 'commands'
+    nopermission: 'You don''t have permissions to run this command'
+    player-not-found: 'The Player can''t be found'
+    no-consol-command: 'This is a player command'
+    xbr:
+        info:
+            description: 'Login to you account'
+            use-login: 'You are registerd'
+            error-pw: 'Passwords are not equal'
+            success: 'Your registerd successfully'
+    msg:
+        description: 'private message to target player'
+        yourself: 'You need to send the messag to an other player'
+        error: 'Your message can''t be send'
+    reply:
+        description: 'private message to target player'
+        error: 'Your message can''t be send'
+    xchat:
+        reload:
+            description: 'Reload xChat'
+            success: 'xChat reloaded'
+    
+message:
+    muted:
+        server: 'This server is muted'
+        chatroom: 'Your Chatroom is muted'
+        player: 'Your are muted, you can not send a message'
+    room: 
+        full: 'This room is full, you can not join'
+        inroom: 'You are already in this room'
+        nopermission: 'You are not allowd to join this room'
+        wrongworld: 'You are not allowd to join this room'
+        error: '&4You are in no Chatroom, standart Chatroom can not be found'
+broadcast:
+    enable: '&a+ broadcast activ: &b%value%'
+    random_msg: '&a+ random messages: &b%value%'
+    intervall: '&a+ duration in (ticks): &b%value%'
+    name: '&a+ broadcast name: &b%value%'
+    counter: '&a+ count of messages: &b%value%'

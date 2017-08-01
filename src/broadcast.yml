@@ -1,0 +1,25 @@
+enabled: false
+
+prefix: '&7[&6Broadcast&7] &f'
+
+br_to_afk_player: false
+
+broadcast1:
+    enabled: true
+    #delay in ticks
+    intervall: 20
+    random: false
+    
+    prefix: '&f[&3Broadcast&f]'
+    messages:
+    - '&4Block-Build &2Website: block-build.enjin.com &6bitte anmelden.'
+
+broadcast2:
+    enabled: true
+    #delay in ticks
+    intervall: 35
+    random: false
+    
+    prefix: '&f[&cYouTube&f]'
+    messages:
+    - '&4Block-Build &2Kommt auf unseren Kanal.'

@@ -1,0 +1,29 @@
+name: xChat
+main: de.mark615.xchat.XChat
+version: 1.0
+description: Chat Plugin
+author: Mark615
+softdepend: [xPermission, Vault]
+
+commands:
+  xbr:
+    description: xChat Broadcast command
+    usage: /xbr <cmd>
+    aliases: [broadcast, br]
+    default: op
+  reply:
+    description: xChat Reply command
+    usage: /re <message>
+    aliases: [r, tell, wispher, send]
+    default: op
+  msg:
+    description: xChat Message command
+    usage: /msg <player> <message>
+    aliases: [tell, w, wisper]
+    default: op
+  xchat:
+    description: xChat config
+    usage: /xchat <cmd>
+    aliases: []
+    default: op
+permissions:

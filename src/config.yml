@@ -1,0 +1,53 @@
+updatecheck: true
+always_show_standard_chat: false
+
+chat:
+    displayname_format: '%prefix%%name%%suffix%'
+    listname_format: '%prefix%%name%%suffix%'
+    chat_format: '%prefix%%name%&7: &f'
+    spy_format: '%6[%sender%&6]->[%target%&6]&7: &6'
+    msgchat_toSender_format: '%6[%sender%&6]->[%target%&6]&7: &6'
+    msgchat_toTarget_format: '%6[%target%&6]<-[%sender%&6]&7: &6'
+    
+    
+xchatroom:
+    standard:
+        name: 'standard'
+        maxplayer: -1
+        standard: true
+        access: auto
+    admin:
+        name: 'Admin-Room'
+        format: '&2[A]&f'
+        permission: 'xchat.room.admin'
+        worlds: 
+        - all
+        maxplayer: 20
+        standard: false
+        access: manually
+    vip:
+        name: 'Vip-Room'
+        permission: 'xchat.room.vip'
+        worlds: 
+        - all
+        maxplayer: -1
+        standard: false
+        access: manually
+    game1:
+        name: 'Games'
+        worlds: 
+        - game1
+        - game2
+        maxplayer: 15
+        standard: 
+        access: auto
+    support:
+        name: 'Support-Room'
+        format: '&2[Help]&f'
+        permission: 'xchat.room.support'
+        maxplayer: 4
+        standard: false
+        access: manually
+        muted-allowed: true
+        
+

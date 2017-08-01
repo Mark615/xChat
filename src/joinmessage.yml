@@ -1,0 +1,9 @@
+ServerJoinMessage:
+  - '&6&l+===========================================+'
+  - '&6&l| Hallo, {player}&6&l! Du befindest dich in der'
+  - '&6&l| &r&6&oLobby &r&6&lvon &c&lBlock-Build&r&6&l.'
+  - '&6&l|'
+  - '&6&l| Unsere Website:&r&6&o    web.block-build.de'
+  - '&6&l| Unser Shop:&r&6&o        shop.block-build.de'
+  - '&6&l| Unser Teamspeak:&r&6&o  ts3.block-build.de'
+  - '&6&l+===========================================+'
