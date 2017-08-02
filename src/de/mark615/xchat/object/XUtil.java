@@ -15,11 +15,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import de.mark615.xapi.object.Updater;
-import de.mark615.xapi.object.Updater.UpdateResult;
-import de.mark615.xapi.object.Updater.UpdateType;
 import de.mark615.xchat.XChat;
 import de.mark615.xchat.file.SettingManager;
+import de.mark615.xchat.object.Updater.UpdateResult;
+import de.mark615.xchat.object.Updater.UpdateType;
 
 public class XUtil
 {
