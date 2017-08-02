@@ -3,6 +3,7 @@ main: de.mark615.xchat.XChat
 version: 1.0
 description: Chat Plugin
 author: Mark615
+softdepend: [Vault]
 
 commands:
   xbr:
