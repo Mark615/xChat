@@ -40,8 +40,8 @@ public class XPlayerSubject
 		{
 			this.prefix = XChat.getInstance().getVaultChat().getPlayerPrefix(p);
 			this.suffix = XChat.getInstance().getVaultChat().getPlayerSuffix(p);
+			
 			this.chatFormat = getFormatedName(SettingManager.getInstance().getFormatPattern("chat_format"));
-
 			p.setPlayerListName(getFormatedName(SettingManager.getInstance().getFormatPattern("displayname_format")));
 			p.setDisplayName(getFormatedName(SettingManager.getInstance().getFormatPattern("listname_format")));
 		}

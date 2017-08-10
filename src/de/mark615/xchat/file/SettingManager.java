@@ -1,8 +1,9 @@
 package de.mark615.xchat.file;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -34,43 +35,49 @@ public class SettingManager
     
     private int dataID;
    
-    @SuppressWarnings("deprecation")
 	public void setup(Plugin p)
     {
     	if (!p.getDataFolder().exists())
     		p.getDataFolder().mkdir();
     	
-    	//config file
+    	//load config
     	fConfig = new File(p.getDataFolder(), "config.yml");
     	if(!fConfig.exists())
     		p.saveResource("config.yml", true);
-
-		//Store it
 		config = YamlConfiguration.loadConfiguration(fConfig);
 		config.options().copyDefaults(true);
 		
-		//Load default messages
-		InputStream defConfigStream = p.getResource("config.yml");
-		YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-		config.setDefaults(defConfig);
+		//Load default config
+		try
+		{
+			BufferedReader br = new BufferedReader(new InputStreamReader(p.getResource("config.yml"), "UTF-8"));
+			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(br);
+			config.setDefaults(defConfig);	
+		}
+		catch(Exception e)
+		{
+			XUtil.severe("cant copy default config.yml", e);
+		}
         
-		broadcastfile = new BroadcastFile();
-		modtFile = new ModtFile();
 		
-		
-        //message file
+        //load message
         fMessage = new File(p.getDataFolder(), "messages.yml");
         if(!fMessage.exists())
 			p.saveResource("messages.yml", true);
-		
-		//Store it
 		message = YamlConfiguration.loadConfiguration(fMessage);
 		message.options().copyDefaults(true);
 		
 		//Load default messages
-		InputStream defMessageStream = p.getResource("messages.yml");
-		YamlConfiguration defMessages = YamlConfiguration.loadConfiguration(defMessageStream);
-		message.setDefaults(defMessages);
+		try
+		{
+			BufferedReader br = new BufferedReader(new InputStreamReader(p.getResource("messages.yml"), "UTF-8"));
+			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(br);
+			message.setDefaults(defConfig);	
+		}
+		catch(Exception e)
+		{
+			XUtil.severe("cant copy default message.yml", e);
+		}
 		try
 		{
 			message.save(fMessage);
@@ -136,21 +143,19 @@ public class SettingManager
     
     public String getFormatPattern(String value)
     {
-    	if (!value.contains("format"))
-    		return null;
     	switch (value)
     	{
 	    	case "displayname_format":
 	    	case "listname_format":
 	    	case "chat_format":
-	    		return config.getString("chat." + value, "%prefix%%name%%suffix%&7:&f");
+	    		return config.getString("chat." + value, "%prefix%%name%%suffix%&7: &f");
 	    		
 	    	case "spy_format":
 	    	case "msgchat_toTarget_format":
-	    		return config.getString("chat." + value, "%6[%sender%&6]->[%target%&6]&7:&6");
+	    		return config.getString("chat." + value, "%6[%sender%&6]->[%target%&6]&7: &6");
 	    		
 	    	case "msgchat_toSender_format":
-	    		return config.getString("chat." + value, "%6[%target%&6]<-[%sender%&6]&7:&6");
+	    		return config.getString("chat." + value, "%6[%target%&6]<-[%sender%&6]&7: &6");
 	    		
 			default:
 	    		return config.getString("chat." + value, null);

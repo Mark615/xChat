@@ -26,7 +26,7 @@ public class ModtManager
 	
 	public void checkMaintenance()
 	{
-		if (plugin.hasXApi())
+		if (plugin.hasXApi() && plugin.getXApi().getXPlugin(XType.xSignIn) != null)
 			this.maintenanceMode = ((XSignInApi) plugin.getXApi().getXPlugin(XType.xSignIn)).isMaintenanceMode();
 		manageMaintenanceBroadcast();
 	}
@@ -37,11 +37,11 @@ public class ModtManager
 		String modt = null;
 		if (!maintenanceMode)
 		{
-			modt = config.getRandomModtItem();
+			modt = config.getRandomModt();
 		}
 		else
 		{
-			modt = config.getRandomMaintenanceItem();
+			modt = config.getRandomModtMaintenance();
 		}
 
 		//replace strings

@@ -79,6 +79,7 @@ public class XChat extends JavaPlugin
 		this.broadcastManager = new BroadcastManager(this);
 		this.modtManager = new ModtManager(this);
 		loadXChatrooms();
+		XUtil.info("Enabled Build " + BUILD);
 	}
 	
 	@Override
@@ -156,8 +157,7 @@ public class XChat extends JavaPlugin
     	}
     	catch (Exception e)
     	{
-    		e.printStackTrace();
-    		XUtil.severe("An error accurred during connection to xApi!");
+    		XUtil.severe("An error accurred during connection to xApi!", e);
     	}
     	
     	return xapiconn != null;

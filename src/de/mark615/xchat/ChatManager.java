@@ -118,24 +118,27 @@ public class ChatManager
 	}
 	
 	public void playerswitchWorld(XPlayerSubject subject)
-	{		
-		for (String key : chatroooms.keySet())
+	{	
+		if (subject != null && subject.getPlayer() != null)
 		{
-			XChatroom room = chatroooms.get(key);
-			if (!room.isFull(subject.getPlayer()) && room.isAccessAuto())
+			for (String key : chatroooms.keySet())
 			{
-				if (room.containsWorld(subject.getPlayer().getWorld().getName()))
+				XChatroom room = chatroooms.get(key);
+				if (!room.isFull(subject.getPlayer()) && room.isAccessAuto())
 				{
-					if (!room.hasPermission() || (room.hasPermission() && subject.getPlayer().hasPermission(room.getPermission())))
+					if (room.containsWorld(subject.getPlayer().getWorld().getName()))
 					{
-						subject.setXChatroom(room);
-						return;
+						if (!room.hasPermission() || (room.hasPermission() && subject.getPlayer().hasPermission(room.getPermission())))
+						{
+							subject.setXChatroom(room);
+							return;
+						}
 					}
 				}
 			}
+			
+			subject.setXChatroom(getStandardXChatroom());
 		}
-		
-		subject.setXChatroom(getStandardXChatroom());
 	}
 	
 	public void registerPlayer(Player p)
@@ -156,6 +159,9 @@ public class ChatManager
 	public void unregisterPlayer(Player p)
 	{
 		XPlayerSubject subject = getXPlayerSubject(p.getUniqueId());
-		subject.setXChatroom(null);
+		if (subject != null)
+		{
+			subject.setXChatroom(null);
+		}
 	}
 }

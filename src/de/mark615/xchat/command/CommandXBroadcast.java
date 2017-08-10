@@ -23,8 +23,8 @@ public class CommandXBroadcast extends XCommand
 	public void fillSubCommands(List<XSubCommand> subcommands)
 	{
 		subcommands.add(new XSubCommand("list"));
-		subcommands.add(new XSubCommand("set"));
-		subcommands.add(new XSubCommand("reload"));
+		subcommands.add(new XSubCommand("enable"));
+		subcommands.add(new XSubCommand("disable"));
 	}
 
 	@Override
@@ -37,14 +37,28 @@ public class CommandXBroadcast extends XCommand
 	@Override
 	public XCommandReturnType run(CommandSender sender, Command command, String s, String[] args)
 	{
-		XCommandReturnType type = null;
 		if (!isSubCommand(args[0]))
 		{
 			XUtil.sendCommandUsage(sender, "use: /xbr <help/?> " + ChatColor.YELLOW + "- for help");
 			return XCommandReturnType.NONE;
 		}
 		
-		return type;
+		if (matchesSubCommand("list", args[0]))
+		{
+			return XCommandReturnType.SUCCESS;
+		}
+		
+		if (matchesSubCommand("enable", args[0]))
+		{
+			return XCommandReturnType.SUCCESS;
+		}
+		
+		if (matchesSubCommand("disable", args[0]))
+		{
+			return XCommandReturnType.SUCCESS;
+		}
+		
+		return XCommandReturnType.NOCOMMAND;
 	}
 	
 	

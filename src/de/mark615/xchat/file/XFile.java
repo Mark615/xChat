@@ -1,8 +1,9 @@
 package de.mark615.xchat.file;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -19,20 +20,24 @@ public class XFile
 	{
 		XChat p = XChat.getInstance();
 		
-		//config file
+		//load config
     	fConfig = new File(p.getDataFolder(), file);
     	if(!fConfig.exists())
     		p.saveResource(file, true);
-
-		//Store it
 		config = YamlConfiguration.loadConfiguration(fConfig);
 		config.options().copyDefaults(true);
 		
-		//Load default messages
-		InputStream defConfigStream = p.getResource(file);
-		@SuppressWarnings("deprecation")
-		YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-		config.setDefaults(defConfig);
+		//Load default file
+		try
+		{
+			BufferedReader br = new BufferedReader(new InputStreamReader(p.getResource(file), "UTF-8"));
+			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(br);
+			config.setDefaults(defConfig);	
+		}
+		catch(Exception e)
+		{
+			XUtil.severe("cant copy default " + file, e);
+		}
 	}
 	
 	public FileConfiguration getConfig()

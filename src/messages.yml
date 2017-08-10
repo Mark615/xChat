@@ -20,6 +20,7 @@ command:
         reload:
             description: 'Reload xChat'
             success: 'xChat reloaded'
+            error: 'unable to reload plugin'
     
 message:
     muted:

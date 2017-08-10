@@ -1,5 +1,6 @@
 package de.mark615.xchat.events;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -40,17 +41,19 @@ public class EventListener implements Listener
 		event.setMaxPlayers(plugin.getModtManager().getMaxPlayer());
 	}
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGH)
 	public void onPlayerJoin(PlayerJoinEvent e)
 	{
-		if (e.getPlayer() != null)
-			this.plugin.getChatManager().registerPlayer(e.getPlayer());
+		final Player p = e.getPlayer();
+		if (p != null)
+			this.plugin.getChatManager().registerPlayer(p);
 	}
 	
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent e)
 	{
-		plugin.getChatManager().unregisterPlayer(e.getPlayer());
+		final Player p = e.getPlayer();
+		plugin.getChatManager().unregisterPlayer(p);
 	}
 	
 	@EventHandler

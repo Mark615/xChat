@@ -18,7 +18,7 @@ public class ModtFile extends XFile
 		return config.getStringList("modt");
 	}
 	
-	public String getRandomModtItem()
+	public String getRandomModt()
 	{
 		final List<String> motds = getModtList();
 		if (motds.size() == 0)
@@ -31,7 +31,7 @@ public class ModtFile extends XFile
 		return config.getStringList("maintenance");
 	}
 	
-	public String getRandomMaintenanceItem()
+	public String getRandomModtMaintenance()
 	{
 		final List<String> motds = getMaintenanceModtList();
 		if (motds.size() == 0)

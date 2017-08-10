@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 import de.mark615.xchat.XChat;
+import de.mark615.xchat.file.SettingManager;
 import de.mark615.xchat.object.XUtil;
 
 public class XChatCommand extends XCommand
@@ -29,42 +30,64 @@ public class XChatCommand extends XCommand
 	protected void showHelp(CommandSender p)
 	{
 		p.sendMessage(ChatColor.GREEN + XChat.PLUGIN_NAME + ChatColor.GRAY + " - " + ChatColor.YELLOW + XUtil.getMessage("command.description"));
-		if (p.hasPermission("xchat.config.reload")) p.sendMessage(ChatColor.GREEN + "/xchat <reload>" + ChatColor.YELLOW + " - " + XUtil.getMessage("command.xchat.reload.description"));
+		if (p.hasPermission("xchat.config.reload")) p.sendMessage(ChatColor.GREEN + "/xchat <reload> <all|br|modt>" + ChatColor.YELLOW + " - " + XUtil.getMessage("command.xchat.reload.description"));
 	}
 
 	@Override
 	protected XCommandReturnType run(CommandSender sender, Command command, String s, String[] args)
 	{
-		XCommandReturnType type = null;
 		if (!this.isSubCommand(args[0]))
 		{
 			XUtil.sendCommandUsage(sender, "use: /xchat <help/?> " + ChatColor.YELLOW + "- for help");
 			return XCommandReturnType.NONE;
 		}
 		
-		try
+		if (matchesSubCommand("reload", args[0]))
 		{
-			if (matchesSubCommand("reload", args[0]))
+			if (!matchPermission(sender, "xchat.config.reload"))
+				return XCommandReturnType.NOPERMISSION;
+			
+			if (args.length < 2)
 			{
-				if (!matchPermission(sender, "xchat.config.reload"))
-					return XCommandReturnType.NOPERMISSION;
-				
-				plugin.onReload();
-				XUtil.sendFileMessage(sender, "command.xchat.reload.success");
-				type = XCommandReturnType.SUCCESS;
+				XUtil.sendCommandUsage(sender, "use: /xchat <reload> <all|br|modt>");
+				return XCommandReturnType.NONE;
 			}
-			else
+			
+			try
 			{
-				type = XCommandReturnType.NOCOMMAND;
+				switch (args[1])
+				{
+					case "all":
+						plugin.onReload();
+						break;
+					
+					case "br":
+						SettingManager.getInstance().getBroadcastFile().reloadConfig();
+						plugin.getBroadcastManager().reloadBroadcastList();
+						break;
+						
+					case "modt":
+						SettingManager.getInstance().getModtFile().reloadConfig();
+						break;
+						
+					default:
+						XUtil.sendCommandUsage(sender, "use: /xchat <reload> <all|br|modt>");
+						return XCommandReturnType.NONE;
+				}
 			}
+			catch (Exception e)
+			{
+				XUtil.severe("unable to reload plugin", e);
+				XUtil.sendFileMessage(sender, "command.xchat.reload.error");
+				return XCommandReturnType.NONE;
+			}
+			
+
+			XUtil.sendFileMessage(sender, "command.xchat.reload.success");
+			return XCommandReturnType.SUCCESS;
 		}
-		catch (Exception e)
-		{
-			XUtil.sendCommandInfo(sender, "&4An Error occurred");
-			XUtil.severe(e.getMessage());
-		}
-		
-		return type;
+
+		return XCommandReturnType.NOCOMMAND;
 	}
 
 }

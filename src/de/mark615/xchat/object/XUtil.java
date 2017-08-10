@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -37,6 +38,11 @@ public class XUtil
 	public static void severe(String severe)
 	{
 		Bukkit.getLogger().severe(XChat.PLUGIN_NAME + "[ERROR] " + severe);
+	}
+	
+	public static void severe(String severe, Exception e)
+	{
+		severe(severe);
 	}
 	
 	public static void debug(Exception e)
@@ -173,7 +179,7 @@ public class XUtil
 
 	
 	
-	public static void updateCheck(final XChat plugin)
+	public static void updateCheck(final JavaPlugin plugin)
 	{
 		Bukkit.getServer().getScheduler().runTaskTimer(plugin, new Runnable()
 		{
@@ -184,7 +190,7 @@ public class XUtil
 				{
 					try
 					{
-						Updater updater = new Updater(plugin, 267923, plugin.getDataFolder(), UpdateType.NO_DOWNLOAD, true);
+						Updater updater = new Updater(plugin, 273577, plugin.getDataFolder(), UpdateType.NO_DOWNLOAD, true);
 						if (updater.getResult() == UpdateResult.UPDATE_AVAILABLE) {
 						    XUtil.info("New version available! " + updater.getLatestName());
 						}

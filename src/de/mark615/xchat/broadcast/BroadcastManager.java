@@ -2,10 +2,10 @@ package de.mark615.xchat.broadcast;
 
 import java.util.HashMap;
 
-import de.mark615.xapi.object.XUtil;
 import de.mark615.xchat.XChat;
 import de.mark615.xchat.file.BroadcastFile;
 import de.mark615.xchat.file.SettingManager;
+import de.mark615.xchat.object.XUtil;
 
 public class BroadcastManager
 {

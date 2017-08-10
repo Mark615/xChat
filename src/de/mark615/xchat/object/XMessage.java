@@ -118,7 +118,7 @@ public class XMessage
 				return XMessageReturnType.MUTEDSERVER;
 			}
 			
-			return room.send(plugin,this);
+			return room.send(plugin, this);
 		}
 		
 		
