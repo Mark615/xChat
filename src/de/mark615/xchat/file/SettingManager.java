@@ -86,6 +86,9 @@ public class SettingManager
 		{
 			XUtil.severe("Could not save message.yml!");
 		}
+		
+		broadcastfile = new BroadcastFile();
+		modtFile = new ModtFile();
     }
     
    
