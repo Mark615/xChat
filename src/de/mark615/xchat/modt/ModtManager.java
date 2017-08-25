@@ -48,6 +48,7 @@ public class ModtManager
 		//%player% name es spielers - match über ip
 		modt = modt.replace("%v%", Bukkit.getServer().getBukkitVersion());
 		modt = modt.replace("%players%", String.valueOf(Bukkit.getServer().getOnlinePlayers().size()));
+		modt = modt.replace("%ln%", "\n");
 		
 		return XUtil.replaceColorCodes(modt);
 	}

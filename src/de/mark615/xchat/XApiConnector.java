@@ -7,12 +7,10 @@ import de.mark615.xchat.object.XUtil;
 public class XApiConnector extends XChatApi
 {
 	private XChat plugin;
-	//private PriorityConfigBase priority;
 	
 	public XApiConnector(de.mark615.xapi.XApi xapi, XChat plugin)
 	{
 		super(xapi);
-		//this.priority = xapi.getPriorityConfig();
 		this.plugin = plugin;
 	}
 

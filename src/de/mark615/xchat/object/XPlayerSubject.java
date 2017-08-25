@@ -36,14 +36,28 @@ public class XPlayerSubject
 		this.rooms.get("global").addPlayer(uuid);
 		this.chatFormat = "[" + name + "]";
 		
-		if (XChat.getInstance().hasVaultChat())
+		reloadDisplayname();
+	}
+	
+	public void reloadDisplayname()
+	{
+		try
 		{
-			this.prefix = XChat.getInstance().getVaultChat().getPlayerPrefix(p);
-			this.suffix = XChat.getInstance().getVaultChat().getPlayerSuffix(p);
+			Player p = getPlayer();
 			
-			this.chatFormat = getFormatedName(SettingManager.getInstance().getFormatPattern("chat_format"));
-			p.setPlayerListName(getFormatedName(SettingManager.getInstance().getFormatPattern("displayname_format")));
-			p.setDisplayName(getFormatedName(SettingManager.getInstance().getFormatPattern("listname_format")));
+			if (XChat.getInstance().hasVaultChat() && isOnline())
+			{
+				this.prefix = XChat.getInstance().getVaultChat().getPlayerPrefix(p);
+				this.suffix = XChat.getInstance().getVaultChat().getPlayerSuffix(p);
+				
+				this.chatFormat = getFormatedName(SettingManager.getInstance().getFormatPattern("chat_format"));
+				p.setPlayerListName(getFormatedName(SettingManager.getInstance().getFormatPattern("displayname_format")));
+				p.setDisplayName(getFormatedName(SettingManager.getInstance().getFormatPattern("listname_format")));
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 	
@@ -70,6 +84,11 @@ public class XPlayerSubject
 	public boolean isAfk()
 	{
 		return afk;
+	}
+	
+	public boolean isOnline()
+	{
+		return getPlayer() != null;
 	}
 	
 	public void setAfkMode(boolean value)
@@ -142,11 +161,12 @@ public class XPlayerSubject
 			}
 			else
 			{
-				if (hasPrivateXChatroom())
+				//TODO privater raum muss nicht verlassen werdend er globale raum gewechselt wird
+				/*if (hasPrivateXChatroom())
 				{
 					rooms.get("private").removePlayer(uuid);
 					rooms.remove("private");
-				}
+				}*/
 				
 				if (!rooms.get("global").getName().equalsIgnoreCase(room.getName()))
 				{

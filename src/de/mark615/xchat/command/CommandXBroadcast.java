@@ -37,6 +37,8 @@ public class CommandXBroadcast extends XCommand
 	@Override
 	public XCommandReturnType run(CommandSender sender, Command command, String s, String[] args)
 	{
+		XUtil.sendCommandInfo(sender, "Work is in progress");
+		
 		if (!isSubCommand(args[0]))
 		{
 			XUtil.sendCommandUsage(sender, "use: /xbr <help/?> " + ChatColor.YELLOW + "- for help");

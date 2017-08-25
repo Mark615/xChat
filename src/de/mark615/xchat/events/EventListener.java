@@ -53,7 +53,7 @@ public class EventListener implements Listener
 	public void onPlayerQuit(PlayerQuitEvent e)
 	{
 		final Player p = e.getPlayer();
-		plugin.getChatManager().unregisterPlayer(p);
+		this.plugin.getChatManager().unregisterPlayer(p);
 	}
 	
 	@EventHandler

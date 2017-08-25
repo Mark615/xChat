@@ -105,33 +105,25 @@ public class XUtil
 	
 	public static void sendCommandUsage(CommandSender s, String usage)
 	{
-		if (s instanceof Player)
-			usage = ChatColor.RED + usage;
-		
+		usage = ChatColor.RED + usage;
 		sendMessage(s, usage, true);
 	}
 	
 	public static void sendCommandInfo(CommandSender s, String info)
 	{
-		if (s instanceof Player)
-			info = ChatColor.GREEN + info;
-		
+		info = ChatColor.GREEN + info;
 		sendMessage(s, info, true);
 	}
 	
 	public static void sendCommandHelp(CommandSender s, String help)
 	{
-		if (s instanceof Player)
-			help = ChatColor.YELLOW + help;
-		
+		help = ChatColor.YELLOW + help;
 		sendMessage(s, help, true);
 	}
 	
 	public static void sendCommandError(CommandSender s, String error)
 	{
-		if (s instanceof Player)
-			error = ChatColor.RED + error;
-		
+		error = ChatColor.RED + error;
 		sendMessage(s, error, true);
 	}
 	

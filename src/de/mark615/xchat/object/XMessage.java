@@ -22,8 +22,7 @@ public class XMessage
 		this.message = message;
 		this.type = type;
 		this.room = null;
-		
-		
+
 		if (p.hasPermission("xchat.chat.color"))
 			this.message = XUtil.replaceColorCodes(this.message);
 		

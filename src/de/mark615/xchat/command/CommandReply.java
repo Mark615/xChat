@@ -30,6 +30,13 @@ public class CommandReply extends XCommand
 	}
 
 	@Override
+	protected void showHelp(CommandSender p)
+	{
+		p.sendMessage(ChatColor.GREEN + XChat.PLUGIN_NAME + ChatColor.GRAY + " - " + ChatColor.YELLOW + XUtil.getMessage("command.description"));
+		p.sendMessage(ChatColor.GREEN + "/reply <msg...>" + ChatColor.YELLOW + " - " + XUtil.getMessage("command.reply.description"));
+	}
+	
+	@Override
 	public XCommandReturnType run(CommandSender sender, Command command, String s, String[] args)
 	{
 		if (!(sender instanceof Player))
@@ -39,18 +46,12 @@ public class CommandReply extends XCommand
 		}
 		XPlayerSubject subject = plugin.getChatManager().getXPlayerSubject(((Player)sender).getUniqueId());
 		
-		if (!this.isSubCommand(args[0]))
+		if (args.length < 1)
 		{
-			XUtil.sendCommandUsage(sender, "use: /reply <help/?> " + ChatColor.YELLOW + "- for help");
+			XUtil.sendCommandUsage(sender, "use: /reply <msg...>");
 			return XCommandReturnType.NONE;
 		}
 		
-		if (args.length < 1)
-		{
-			XUtil.sendCommandUsage(sender, "use: /reply <msg>");
-			return XCommandReturnType.NONE;
-		}
-
 		XPlayerSubject subjectTarget = plugin.getChatManager().getXPlayerSubject(subject.getLastMsgChatTarget());
 		if (subjectTarget == null || subjectTarget.getPlayer() == null)
 		{
@@ -73,13 +74,6 @@ public class CommandReply extends XCommand
 		}
 		
 		return XCommandReturnType.SUCCESS;
-	}
-
-	@Override
-	protected void showHelp(CommandSender p)
-	{
-		p.sendMessage(ChatColor.GREEN + XChat.PLUGIN_NAME + ChatColor.GRAY + " - " + ChatColor.YELLOW + XUtil.getMessage("command.description"));
-		p.sendMessage(ChatColor.GREEN + "/reply <msg...>" + ChatColor.YELLOW + " - " + XUtil.getMessage("command.reply.description"));
 	}
 
 }

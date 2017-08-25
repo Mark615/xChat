@@ -30,7 +30,13 @@ public class CommandMsg extends XCommand
 		subcommands.add(new XSubCommand("msg", "tell", "wispher", "send"));
 	}
 
-	@SuppressWarnings("deprecation")
+	@Override
+	protected void showHelp(CommandSender p)
+	{
+		p.sendMessage(ChatColor.GREEN + XChat.PLUGIN_NAME + ChatColor.GRAY + " - " + ChatColor.YELLOW + XUtil.getMessage("command.description"));
+		p.sendMessage(ChatColor.GREEN + "/msg <player> <msg...>" + ChatColor.YELLOW + " - " + XUtil.getMessage("command.msg.description"));
+	}
+
 	@Override
 	public XCommandReturnType run(CommandSender sender, Command command, String s, String[] args)
 	{
@@ -41,13 +47,7 @@ public class CommandMsg extends XCommand
 		}
 		XPlayerSubject subject = plugin.getChatManager().getXPlayerSubject(((Player)sender).getUniqueId());
 		
-		if (!this.isSubCommand(args[0]))
-		{
-			XUtil.sendCommandUsage(sender, "use: /msg <help/?> " + ChatColor.YELLOW + "- for help");
-			return XCommandReturnType.NONE;
-		}
-		
-		if ((args.length < 2) && (subject.getLastMsgChatTarget() == null))
+		if ((args.length < 1 && subject.getLastMsgChatTarget() == null) || (args.length < 2))
 		{
 			XUtil.sendCommandUsage(sender, "use: /msg <player> <msg...>");
 			return XCommandReturnType.NONE;
@@ -113,12 +113,5 @@ public class CommandMsg extends XCommand
 		}
 		
 		return XCommandReturnType.SUCCESS;
-	}
-
-	@Override
-	protected void showHelp(CommandSender p)
-	{
-		p.sendMessage(ChatColor.GREEN + XChat.PLUGIN_NAME + ChatColor.GRAY + " - " + ChatColor.YELLOW + XUtil.getMessage("command.description"));
-		p.sendMessage(ChatColor.GREEN + "/msg <player> <msg...>" + ChatColor.YELLOW + " - " + XUtil.getMessage("command.msg.description"));
 	}
 }

@@ -83,7 +83,7 @@ public abstract class XCommand
 			}
 		}
 
-		if (matchesSubCommand("help", args[0]))
+		if (!allowNoArgs && matchesSubCommand("help", args[0]))
 		{
 			showHelp(sender);
 			return true;

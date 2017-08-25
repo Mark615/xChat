@@ -114,6 +114,11 @@ public class XChat extends JavaPlugin
 		this.chatmanager.unregisterAllXChatRooms();
 		this.loadXChatrooms();
 		
+		for (Player p : Bukkit.getServer().getOnlinePlayers())
+		{
+			this.chatmanager.registerPlayer(p);
+		}
+		
 		this.broadcastManager.reloadBroadcastList();
 	}
 	
@@ -218,11 +223,6 @@ public class XChat extends JavaPlugin
 		for (XChatroom rooms : settings.getXChatrooms())
 		{
 			this.chatmanager.registerXChatroom(rooms);
-		}
-		
-		for (Player p : Bukkit.getServer().getOnlinePlayers())
-		{
-			this.chatmanager.registerPlayer(p);
 		}
 	}
 	

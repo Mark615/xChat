@@ -107,7 +107,7 @@ public class XChatroom
 			
 			case STANDARD:
 				XPlayerSubject subject = plugin.getChatManager().getXPlayerSubject(message.getSender().getUniqueId());
-				message.setMessage(format + subject.getChatFormat() + XChatUtil.replaceColorCode(message.getMessage(), subject.getPlayer()));
+				message.setMessage(format + subject.getChatFormat() + message.getMessage());
 				sendToRoom(message);
 				
 				type = XMessageReturnType.SUCCESS;

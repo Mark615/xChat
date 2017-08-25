@@ -3,6 +3,7 @@ package de.mark615.xchat;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import de.mark615.xchat.object.XChatroom;
@@ -22,6 +23,8 @@ public class ChatManager
 		this.plugin = plugin;
 		this.players = new HashMap<>();
 		this.chatroooms = new HashMap<>();
+		
+		scheduldtask();
 	}
 	
 	
@@ -119,7 +122,7 @@ public class ChatManager
 	
 	public void playerswitchWorld(XPlayerSubject subject)
 	{	
-		if (subject != null && subject.getPlayer() != null)
+		if (subject != null && subject.isOnline())
 		{
 			for (String key : chatroooms.keySet())
 			{
@@ -143,7 +146,7 @@ public class ChatManager
 	
 	public void registerPlayer(Player p)
 	{
-		XPlayerSubject subject = players.get(p.getUniqueId());
+		XPlayerSubject subject = getXPlayerSubject(p.getUniqueId());
 		if (subject == null)
 		{
 			subject = new XPlayerSubject(p);
@@ -163,5 +166,20 @@ public class ChatManager
 		{
 			subject.setXChatroom(null);
 		}
+	}
+	
+	private void scheduldtask()
+	{
+		Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
+			
+			@Override
+			public void run()
+			{
+				for (UUID uuid : players.keySet())
+				{
+					players.get(uuid).reloadDisplayname();
+				}
+			}
+		}, 20, 10 * 20);
 	}
 }

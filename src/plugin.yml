@@ -14,7 +14,7 @@ commands:
   reply:
     description: xChat Reply command
     usage: /re <message>
-    aliases: [r, tell, wispher, send]
+    aliases: [r]
     default: op
   msg:
     description: xChat Message command
