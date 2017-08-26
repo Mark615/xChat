@@ -2,7 +2,6 @@ package de.mark615.xchat.command;
 
 import java.util.List;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -31,14 +30,16 @@ public class CommandXBroadcast extends XCommand
 	protected void showHelp(CommandSender sender)
 	{
 		// TODO Auto-generated method stub
-		
+		XUtil.sendCommandInfo(sender, "&cWork is in progress");
 	}
 
 	@Override
 	public XCommandReturnType run(CommandSender sender, Command command, String s, String[] args)
 	{
-		XUtil.sendCommandInfo(sender, "Work is in progress");
+		showHelp(sender);
+		return XCommandReturnType.SUCCESS;
 		
+		/*
 		if (!isSubCommand(args[0]))
 		{
 			XUtil.sendCommandUsage(sender, "use: /xbr <help/?> " + ChatColor.YELLOW + "- for help");
@@ -61,6 +62,7 @@ public class CommandXBroadcast extends XCommand
 		}
 		
 		return XCommandReturnType.NOCOMMAND;
+		*/
 	}
 	
 	
