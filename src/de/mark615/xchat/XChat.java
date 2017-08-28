@@ -230,7 +230,12 @@ public class XChat extends JavaPlugin
 	
 	public boolean hasXApi()
 	{
-		return xapi != null;
+		return (xapi != null && xapi.getXPlugin(XType.xChat) != null);
+	}
+	
+	public boolean hasXApi(XType type)
+	{
+		return (hasXApi() && xapi.getXPlugin(type) != null);
 	}
 	
 	public XApi getXApi()

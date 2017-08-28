@@ -26,7 +26,7 @@ public class ModtManager
 	
 	public void checkMaintenance()
 	{
-		if (plugin.hasXApi() && plugin.getXApi().getXPlugin(XType.xSignIn) != null)
+		if (plugin.hasXApi(XType.xSignIn))
 			this.maintenanceMode = ((XSignInApi) plugin.getXApi().getXPlugin(XType.xSignIn)).isMaintenanceMode();
 		manageMaintenanceBroadcast();
 	}
@@ -48,6 +48,8 @@ public class ModtManager
 		//%player% name es spielers - match über ip
 		modt = modt.replace("%v%", Bukkit.getServer().getBukkitVersion());
 		modt = modt.replace("%players%", String.valueOf(Bukkit.getServer().getOnlinePlayers().size()));
+		if (plugin.hasXApi(XType.xSignIn))
+			modt = modt.replace("%ip%", ((XSignInApi) plugin.getXApi().getXPlugin(XType.xSignIn)).getNamefromIP(iNetAdd.getHostAddress()));
 		modt = modt.replace("%ln%", "\n");
 		
 		return XUtil.replaceColorCodes(modt);
