@@ -1,6 +1,6 @@
 name: xChat
 main: de.mark615.xchat.XChat
-version: 1.0
+version: 0.1
 description: Chat Plugin
 author: Mark615
 softdepend: [Vault]

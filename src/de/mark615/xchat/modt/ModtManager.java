@@ -33,6 +33,7 @@ public class ModtManager
 	
 	public String getNextModt(InetAddress iNetAdd)
 	{
+		String ip = ((XSignInApi) plugin.getXApi().getXPlugin(XType.xSignIn)).getNamefromIP(iNetAdd.getHostAddress());
 		ModtFile config = SettingManager.getInstance().getModtFile();
 		String modt = null;
 		if (!maintenanceMode)
@@ -43,16 +44,26 @@ public class ModtManager
 		{
 			modt = config.getRandomModtMaintenance();
 		}
-
-		//replace strings
-		//%player% name es spielers - match über ip
+		
+		if (modt.contains("%ip%"))
+		{
+			if (ip == null || !plugin.hasXApi(XType.xSignIn))
+				return getNextModt(iNetAdd);
+		}
+		
+		modt = replacePlaceHolder(modt, ip);
+		
+		return XUtil.replaceColorCodes(modt);
+	}
+	
+	private String replacePlaceHolder(String modt, String ip)
+	{
 		modt = modt.replace("%v%", Bukkit.getServer().getBukkitVersion());
 		modt = modt.replace("%players%", String.valueOf(Bukkit.getServer().getOnlinePlayers().size()));
 		if (plugin.hasXApi(XType.xSignIn))
-			modt = modt.replace("%ip%", ((XSignInApi) plugin.getXApi().getXPlugin(XType.xSignIn)).getNamefromIP(iNetAdd.getHostAddress()));
+			modt = modt.replace("%ip%", ip);
 		modt = modt.replace("%ln%", "\n");
-		
-		return XUtil.replaceColorCodes(modt);
+		return modt;
 	}
 	
 	public int getMaxPlayer()
